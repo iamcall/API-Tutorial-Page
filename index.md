@@ -118,4 +118,4 @@ plt.show()
 
 Now that you have the data loaded in, it's your turn to try! Find APIs you can play around with and analyze your data.
 
-`Happy Coding !`
+_Happy Coding !_
