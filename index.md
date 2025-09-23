@@ -128,6 +128,10 @@ plt.legend(["Max Temp", "Min Temp"])
 plt.show()
 ```
 
+
+![7-day London weather forecast plot](london_weather.png "7-day London Weather")
+
+
 ---
 
 
