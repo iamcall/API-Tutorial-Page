@@ -132,6 +132,7 @@ plt.show()
 ![7-day London weather forecast plot](london_weather.png "7-day London Weather")
 
 
+
 ---
 
 
