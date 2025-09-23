@@ -89,27 +89,44 @@ print(df)
 
 
 ---
-## Step 5: (optional) Plot
+## Step 5 (Optional): Plot a 7-Day Forecast  
 
+Instead of just one row of current weather, we can fetch a full **week of daily forecasts**. This lets us make a line plot of temperature trends.  
 
-Now that the data is in a DataFrame, we can easily make a quick plot.  
-
-In this case, we only fetched one row of weather data, so the plot will look a bit boring — but if you query **hourly forecasts** instead, you can visualize trends (like temperature over time).  
-
-Here’s a simple example using the single data point:  
+We’ll ask the API for **daily maximum and minimum temperatures** over the next 7 days:  
 
 ```python
 import matplotlib.pyplot as plt
+import pandas as pd
+import requests
 
-# Plot temperature as a bar chart
-df.plot(kind="bar", y="temperature", legend=False)
-plt.title("Current Temperature in London")
+# Define the API endpoint
+url = "https://api.open-meteo.com/v1/forecast"
+
+# Query parameters: daily forecast for 7 days
+params = {
+    "latitude": 51.5072,   # London
+    "longitude": -0.1276,
+    "daily": ["temperature_2m_max", "temperature_2m_min"],
+    "timezone": "GMT"
+}
+
+# Send request
+response = requests.get(url, params=params)
+data = response.json()
+
+# Convert "daily" data into a DataFrame
+df = pd.DataFrame(data["daily"])
+
+# Plot max & min temperature over time
+df.plot(x="time", y=["temperature_2m_max", "temperature_2m_min"], marker="o")
+plt.title("7-Day Temperature Forecast for London")
+plt.xlabel("Date")
 plt.ylabel("°C")
-plt.xticks([])  # hide x-axis labels since it's just one point
+plt.xticks(rotation=45)
+plt.legend(["Max Temp", "Min Temp"])
 plt.show()
-
 ```
-
 
 ---
 
